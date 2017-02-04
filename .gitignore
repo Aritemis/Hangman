@@ -45,3 +45,11 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+bin/controller/Controller.class
+bin/controller/Runner.class
+bin/view/WindowFrame.class
+bin/view/Panel.class
+bin/controller/FileChooser.class
+bin/model/Hangman.class
+bin/view/Panel$1.class
+.settings/org.eclipse.jdt.core.prefs
