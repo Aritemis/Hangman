@@ -20,7 +20,7 @@ public class Controller
 	
 	private List<String> wordList = new ArrayList<String>();
 	private ArrayList<String> alreadyGuessed = new ArrayList<String>();
-	private boolean currentlyPlayingGame;
+	private boolean currentlyPlayingGame = true;
 	private Hangman game;
 	private WindowFrame frame;
 	private FileChooser fileChooser;
@@ -52,7 +52,15 @@ public class Controller
 			quit();
 		}
 		frame = new WindowFrame(this);
-			
+		
+	}
+	
+	public void newGame()
+	{
+		currentlyPlayingGame = true;
+		this.game = new Hangman(wordList);
+		alreadyGuessed = new ArrayList<String>();
+		frame.resetPanel();
 	}
 	
 	
@@ -77,36 +85,46 @@ public class Controller
 	public int determineSituation(String input)
 	{
 		int outcome = 8;
-		boolean guessedBefore = checkList(input);
-		if(guessedBefore)
+		if(currentlyPlayingGame)
 		{
-			outcome = 4;
-		}
-		else
-		{
-			boolean contains = game.wordContains(input);
-			if(contains)
+			boolean guessedBefore = checkList(input);
+			if(guessedBefore)
 			{
-				if(game.checkForCompletion())
-				{
-					outcome = 0;
-				}
-				else
-				{
-					outcome = 1;
-				}
+				outcome = 4;
 			}
 			else
 			{
-				if(!(game.getIncorrectGuess()==6))
+				boolean contains = game.wordContains(input);
+				if(contains)
 				{
-					outcome = 2;
+					if(game.checkForCompletion())
+					{
+						outcome = 0;
+						currentlyPlayingGame = false;
+					}
+					else
+					{
+						outcome = 1;
+					}
 				}
 				else
 				{
-					outcome = 3;
+					if(!(game.getIncorrectGuess()==6))
+					{
+						outcome = 2;
+					}
+					else
+					{
+						outcome = 3;
+						currentlyPlayingGame = false;
+					}
 				}
 			}
+			
+		}
+		else
+		{
+			outcome = 5;
 		}
 		return outcome;
 	}

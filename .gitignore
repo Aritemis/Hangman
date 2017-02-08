@@ -53,3 +53,4 @@ bin/controller/FileChooser.class
 bin/model/Hangman.class
 bin/view/Panel$1.class
 .settings/org.eclipse.jdt.core.prefs
+/bin/

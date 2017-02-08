@@ -24,6 +24,11 @@ public class WindowFrame extends JFrame
 		setUpFrame();
 	}
 	
+	public void resetPanel()
+	{
+		panel.reset();
+	}
+	
 	private void setUpFrame() 
 	{
 		this.setContentPane(panel);
