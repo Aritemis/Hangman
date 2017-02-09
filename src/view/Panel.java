@@ -50,14 +50,14 @@ public class Panel extends JPanel
 		enter.setBackground(new Color(240, 240, 240));
 		displayLog.setBackground(new Color(224, 255, 255));
 		springLayout.putConstraint(SpringLayout.NORTH, inputField, 1, SpringLayout.NORTH, enter);
-		springLayout.putConstraint(SpringLayout.EAST, inputField, -38, SpringLayout.WEST, enter);
+		springLayout.putConstraint(SpringLayout.EAST, inputField, -28, SpringLayout.WEST, enter);
 		springLayout.putConstraint(SpringLayout.WEST, inputField, 0, SpringLayout.WEST, displayLog);
 		springLayout.putConstraint(SpringLayout.NORTH, enter, 16, SpringLayout.SOUTH, displayLog);
 		springLayout.putConstraint(SpringLayout.EAST, enter, 0, SpringLayout.EAST, displayLog);
-		springLayout.putConstraint(SpringLayout.WEST, displayLog, 50, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, displayLog, -75, SpringLayout.SOUTH, this);
-		springLayout.putConstraint(SpringLayout.EAST, displayLog, -50, SpringLayout.EAST, this);
-		springLayout.putConstraint(SpringLayout.NORTH, displayLog, 50, SpringLayout.NORTH, this);
+		springLayout.putConstraint(SpringLayout.WEST, displayLog, 25, SpringLayout.WEST, this);
+		springLayout.putConstraint(SpringLayout.SOUTH, displayLog, -50, SpringLayout.SOUTH, this);
+		springLayout.putConstraint(SpringLayout.EAST, displayLog, -25, SpringLayout.EAST, this);
+		springLayout.putConstraint(SpringLayout.NORTH, displayLog, 25, SpringLayout.NORTH, this);
 	}
 	
 	private void setUpPanel()
@@ -147,6 +147,7 @@ public class Panel extends JPanel
 								baseControl.quit();
 								break;
 						}
+						inputField.setText("");
 					}
 				}
 				
@@ -230,6 +231,7 @@ public class Panel extends JPanel
 								break;
 						}
 					}
+					inputField.setText("");
 				}
 				
 			}
