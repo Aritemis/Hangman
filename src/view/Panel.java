@@ -30,14 +30,11 @@ public class Panel extends JPanel
 	
 	public Panel(Controller baseControl)
 	{
-		setBackground(new Color(135, 206, 250));
 		this.baseControl = baseControl;
 		this.springLayout = new SpringLayout();
 		this.enter = new JButton("Enter");
-		enter.setBackground(new Color(240, 240, 240));
 		this.inputField = new JTextField();
 		this.displayLog = new JTextPane();
-		displayLog.setBackground(new Color(224, 255, 255));
 		
 		//how I make sure only the input I want triggers the update method
 		this.validInput = new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
@@ -49,6 +46,9 @@ public class Panel extends JPanel
 
 	private void setUpLayout()
 	{
+		setBackground(new Color(135, 206, 250));
+		enter.setBackground(new Color(240, 240, 240));
+		displayLog.setBackground(new Color(224, 255, 255));
 		springLayout.putConstraint(SpringLayout.NORTH, inputField, 1, SpringLayout.NORTH, enter);
 		springLayout.putConstraint(SpringLayout.EAST, inputField, -38, SpringLayout.WEST, enter);
 		springLayout.putConstraint(SpringLayout.WEST, inputField, 0, SpringLayout.WEST, displayLog);
