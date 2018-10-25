@@ -14,12 +14,11 @@ import controller.Controller;
 
 public class WindowFrame extends JFrame 
 {
-	private Controller baseControl;
+	private static final long serialVersionUID = -680063813629448616L;
 	private Panel panel;
 	
 	public WindowFrame(Controller baseControl)
 	{
-		this.baseControl = baseControl;
 		this.panel = new Panel(baseControl);
 		setUpFrame();
 	}

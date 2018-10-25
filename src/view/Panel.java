@@ -8,25 +8,22 @@ package view;
 import javax.swing.JPanel;
 import controller.Controller;
 import javax.swing.SpringLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import java.awt.Color;
 
 public class Panel extends JPanel 
 {
+	private static final long serialVersionUID = 7955779864066131449L;
 	private Controller baseControl;
 	private JTextField inputField;
 	private SpringLayout springLayout;
 	private JButton enter;
 	private JTextPane displayLog;
 	private String validInput;
-	
 	
 	public Panel(Controller baseControl)
 	{
@@ -75,176 +72,89 @@ public class Panel extends JPanel
 	{
 		enter.addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent onClick) 
 			{
-				if(inputField.getText().length() > 0)
-				{
-					//only looks at the first value in the text field
-					String input = new String(inputField.getText().substring(0, 1).toUpperCase());
-					//only updates if the given value is a letter
-					if(validInput.contains(input))
-					{
-						int outcome = baseControl.determineSituation(input);
-						switch(outcome)
-						{
-							case 0:
-								
-								inputField.setText("");
-								displayLog.setText(baseControl.update() + 
-										"You Won! Well done.\nClose this window to exit"
-										+ " or enter any letter for a new game.");
-								break;
-								
-								
-							case 1:
-								
-								inputField.setText("");
-								displayLog.setText(baseControl.update() +
-										"The word in question does indeed contain the letter '"
-										+ input + "'.\nAnd for your next guess...?");
-								break;
-								
-								
-							case 2:
-								
-								inputField.setText("");
-								displayLog.setText(baseControl.update() +
-										"The word in question does not contain the letter '"
-										+ input + "'.\nAnd for your next guess...?");
-								break;
-								
-								
-							case 3:
-								
-								inputField.setText("");
-								displayLog.setText(baseControl.update() 
-										+ "The word was " + baseControl.revealWord() + "\n\n\n"
-										+ "You Lost. Too bad.\nClose this window to exit"
-										+ " or enter any letter for a new game.)");
-								break;
-								
-								
-							case 4:
-								
-								inputField.setText("");
-								displayLog.setText(baseControl.update() +
-										"You've already guessed that letter.");
-								break;
-								
-								
-							case 5:
-								
-								baseControl.newGame();
-								break;
-								
-								
-							default:
-								
-								System.err.println("Default case reached");
-								//that should never happen. program just gives up.
-								baseControl.quit();
-								break;
-						}
-						inputField.setText("");
-					}
-				}
-				
+				checkInput();
 			}
-
 		});
-		
 		
 		inputField.addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				if(inputField.getText().length() > 0)
-				{
-					//only looks at the first value in the text field
-					String input = new String(inputField.getText().substring(0, 1).toUpperCase());
-					//only updates if the given value is a letter
-					if(validInput.contains(input))
-					{
-						int outcome = baseControl.determineSituation(input);
-						switch(outcome)
-						{
-							case 0:
-								
-								inputField.setText("");
-								displayLog.setText(baseControl.update() + 
-										"You Won! Well done.\nClose this window to exit"
-										+ " or enter any letter for a new game.");
-								break;
-								
-								
-							case 1:
-								
-								inputField.setText("");
-								displayLog.setText(baseControl.update() +
-										"The word in question does indeed contain the letter '"
-										+ input + "'.\nAnd for your next guess...?");
-								break;
-								
-								
-							case 2:
-								
-								inputField.setText("");
-								displayLog.setText(baseControl.update() +
-										"The word in question does not contain the letter '"
-										+ input + "'.\nAnd for your next guess...?");
-								break;
-								
-								
-							case 3:
-								
-								inputField.setText("");
-								displayLog.setText(baseControl.update() 
-										+ "The word was " + baseControl.revealWord() + "\n\n\n"
-										+ "You Lost. Too bad.\nClose this window to exit"
-										+ " or enter any letter for a new game.)");
-								break;
-								
-								
-							case 4:
-								
-								inputField.setText("");
-								displayLog.setText(baseControl.update() +
-										"You've already guessed that letter.");
-								break;
-								
-								
-							case 5:
-								
-								baseControl.newGame();
-								break;
-								
-								
-							default:
-								
-								System.err.println("Default case reached");
-								//that should never happen. program just gives up.
-								baseControl.quit();
-								break;
-						}
-					}
-					inputField.setText("");
-				}
-				
+				checkInput();
 			}
 
 		});
 	}
 	
+	private void checkInput()
+	{
+		if(inputField.getText().trim().length() > 0)
+		{
+			//only looks at the first value in the text field
+			String input = new String(inputField.getText().substring(0, 1).toUpperCase());
+			//only updates if the given value is a letter
+			if(validInput.contains(input))
+			{
+				int outcome = baseControl.determineSituation(input);
+				switch(outcome)
+				{
+					case 0:
+						inputField.setText("");
+						displayLog.setText(baseControl.update() + 
+								"You Won! Well done.\nClose this window to exit"
+								+ " or enter any letter for a new game.");
+						break;
+						
+					case 1:
+						inputField.setText("");
+						displayLog.setText(baseControl.update() +
+								"The word in question does indeed contain the letter '"
+								+ input + "'.\nAnd for your next guess...?");
+						break;
+						
+					case 2:
+						inputField.setText("");
+						displayLog.setText(baseControl.update() +
+								"The word in question does not contain the letter '"
+								+ input + "'.\nAnd for your next guess...?");
+						break;
+						
+					case 3:
+						inputField.setText("");
+						displayLog.setText(baseControl.update() 
+								+ "The word was " + baseControl.revealWord() + "\n\n\n"
+								+ "You Lost. Too bad.\nClose this window to exit"
+								+ " or enter any letter for a new game.");
+						break;
+						
+					case 4:
+						inputField.setText("");
+						displayLog.setText(baseControl.update() +
+								"You've already guessed that letter.");
+						break;
+						
+					case 5:
+						baseControl.newGame();
+						break;
+					
+					default:	
+						System.err.println("Default case reached. Something broke.");
+						baseControl.quit();
+						break;
+				}
+				inputField.setText("");
+			}
+		}	
+	}
 	
 	public void reset()
 	{
 		displayLog.setText(baseControl.update());
 		inputField.setText("");
 	}
-	
 	
 }

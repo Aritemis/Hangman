@@ -5,20 +5,17 @@
 
 package controller;
 
-import java.awt.Frame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
 import model.Hangman;
 import view.WindowFrame;
 
 public class Controller 
 {
-	
 			private List<String> wordList = new ArrayList<>(Arrays.asList("abashes", "academic", "acclimation", "adhesive", "admitting",
 					"adoring", "adverbial", "amicable", "anagram", "antipasto", "apathy", "aping", "appeased", "apposite",
 					"approvals", "arrays", "artery", "atmosphere", "attitudes", "awash", "backbone", "bagels", "balloon",
@@ -74,7 +71,9 @@ public class Controller
 	private boolean currentlyPlayingGame = true;
 	private Hangman game;
 	private WindowFrame frame;
+	@SuppressWarnings("unused")
 	private FileChooser fileChooser;
+	@SuppressWarnings("unused")
 	private int wordsInList = 0;
 
 	/**
@@ -83,34 +82,32 @@ public class Controller
 	 */
 	public void start()
 	{
-		
-		
-		
-		//enables use of a file chooser
-//		fileChooser = new FileChooser();
-//		try 
-//		{
-//			readWords(fileChooser.pickAFile());
-//		} 
-//		catch (FileNotFoundException fnf) 
-//		{
-//			System.err.println("File Not Found");
-//			quit();
-//		}
-//		if(wordsInList > 0)
-//		{
-//			this.game = new Hangman(wordList);
-//		}
-//		else
-//		{
-//			System.err.println("No words found in file");
-//			quit();
-//		}
+		// Enables use of a file chooser if you want to load words from
+		// a file in stead.
+		/*
+		fileChooser = new FileChooser();
+		try 
+		{
+			readWords(fileChooser.pickAFile());
+		} 
+		catch (FileNotFoundException fnf) 
+		{
+			System.err.println("File Not Found");
+			quit();
+		}
+		if(wordsInList > 0)
+		{
+			this.game = new Hangman(wordList);
+		}
+		else
+		{
+			System.err.println("No words found in file");
+			quit();
+		}
+		*/
 		
 		this.game = new Hangman(wordList);
-		
 		frame = new WindowFrame(this);
-		
 	}
 	
 	public void newGame()
@@ -120,7 +117,6 @@ public class Controller
 		alreadyGuessed = new ArrayList<String>();
 		frame.resetPanel();
 	}
-	
 	
 	/**
 	 * Read in a list of words. 
@@ -168,7 +164,7 @@ public class Controller
 				}
 				else
 				{
-					if(!(game.getIncorrectGuess()==6))
+					if(!(game.getIncorrectGuess() == 5))
 					{
 						outcome = 2;
 					}
@@ -210,7 +206,6 @@ public class Controller
 		return updateWordDisplay() + "\n\n\n\n" + updateStatus() + "\n\n";
 	}
 	
-	
 	public String updateWordDisplay() 
 	{
 		return game.getWordDisplay();
@@ -224,24 +219,23 @@ public class Controller
 	public String updateStatus()
 	{
 		String result = new String("");
-		int remaining = 6 - game.getIncorrectGuess();
+		int remaining = 5 - game.getIncorrectGuess();
 		if(remaining == 1)
 		{
-			result = new String("Status: You are naught but a head...");
+			result = new String("Status: You have naught but a head...");
 		}
 		else if(remaining == 0)
 		{
-			result = new String("Status: You lost all your limbs...    : 0");
+			result = new String("Status: You lost all your limbs...    :0");
 		}
-		else if(remaining == 6)
+		else if(remaining == 5)
 		{
-			result = new String("Status: You still have all your limbs... For now...");
+			result = new String("Status: You still have all five of your limbs... For now...");
 		}
 		else
 		{
 			result = new String("Status: You have " + remaining + " limbs left.");
 		}
-		
 		return result;
 	}
 
